@@ -1,18 +1,21 @@
+# 리스트에 담아 문자열을 각각 구분한다
 position = list(input())
-row = int(position[1])
-column = int(ord(position[0])) - int(ord('a')) + 1
 
-# 8가지 방향
-steps = [(-2, -1), (-1, -2), (1, -2), (2, -1), (2, 1), (1, 2), (-1, 2), (-2, 1)]
+# row는 그대로 가져온다 
+x_position = int(position[1])
 
-# 8가지 방향에 대한 위치 이동
-result = 0
+# 문자열(a-h)을 int로 변환한다 
+y_position = int(ord(position[0])) - int(ord('a')) + 1
+
+# 이동 가능한 모든 경우의 수 : 8가지
+steps = [(2, 1), (2, -1), (1, 2), (1, -2), (-1, -2), (-1, 2), (-2, 1), (-2, -1)]
+
+count = 0
 for step in steps:
-  # 이동하고자 하는 위치 확인
-  next_row = row + step[0]
-  next_column = column + step[1]
-  # 해당 위치로 이동가능하다면 카운트 증가
-  if next_row >= 1 and next_row <= 8 and next_column >= 1 and next_column <= 8:
-    result += 1
+  # 8가지 경우의 수 중에서 범위 밖인 경우에는 숫자를 세지 않는다
+  next_x_position = x_position + step[1]
+  next_y_position = y_position + step[0]
+  if next_x_position > 1 and next_x_position < 8 and next_y_position > 1 and next_y_position < 8:
+    count += 1
 
-print(result)
+print(count)

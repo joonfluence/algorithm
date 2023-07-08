@@ -1,5 +1,8 @@
+# 예제 4-1 상하좌우
+
 n = int(input())
 actions = list(input().split())
+move_types = ['R', 'L', 'U', 'D']
 
 def implementation():
   current_position = [1, 1]
@@ -10,18 +13,18 @@ def implementation():
     mover = actions.pop(0)
 
     # x 축으로 이동시킨다
-    if mover == 'R':
+    if mover == move_types[0]:
       if current_position_x < n:
         current_position_x += 1
-    elif mover == 'L':
+    elif mover == move_types[1]:
       if current_position_x > 1:
         current_position_x -= 1
     
     # y 축으로 이동시킨다
-    if mover == 'U':
+    if mover == move_types[2]:
       if current_position_y > 1:
         current_position_y -= 1
-    elif mover == 'D':
+    elif mover == move_types[3]:
       if current_position_y < n:
         current_position_y += 1
   
