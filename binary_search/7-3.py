@@ -1,3 +1,5 @@
+# 리팩토링 필요
+
 n, m = map(int, input().split())
 a = list(map(int, input().split()))
 
