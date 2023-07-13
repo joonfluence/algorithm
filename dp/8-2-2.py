@@ -1,6 +1,7 @@
 n = int(input())
 d = [0] * 30001
 
+# bottom-up, memoization 방식
 def dp(x):
   for i in range(2, x + 1):
     d[i] = d[i-1] + 1

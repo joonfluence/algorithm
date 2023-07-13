@@ -1,6 +1,7 @@
 n = int(input())
 d = [0] * 30001
 
+# top-down, memoization 방식
 def dp(x):
   if x == 1:
     return 0

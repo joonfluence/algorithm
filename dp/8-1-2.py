@@ -1,5 +1,6 @@
 d = [0] * 100
 
+# top-down, memoization 방식
 def fibonacci(n):
   if n == 1 or n == 2:
     return 1
