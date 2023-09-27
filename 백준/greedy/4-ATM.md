@@ -1,4 +1,4 @@
-# 문제 설명
+# 문제 (실버4)
 
 - 문제 링크 : [https://www.acmicpc.net/problem/11399](https://www.acmicpc.net/problem/11399) 
 
