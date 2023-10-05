@@ -16,7 +16,4 @@ for i in range(1, n+1):
 result = []
 
 for x, y, z, w in input_numbers:
-  result.append(psum[z][w] - psum[x-1][w] - psum[z][y-1] + psum[x-1][y-1])
-
-for element in result:
-  print(element)
+  print(psum[z][w] - psum[x-1][w] - psum[z][y-1] + psum[x-1][y-1])
