@@ -1,27 +1,20 @@
 n = int(input())
-steps = input().split()
-actions = ['L', 'R', 'U', 'D']
-actions_move = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+actions = input().split()
+x, y = 1, 1
 
-start = (1, 1)
-x, y = start
+moves = ['L', 'R', 'U', 'D']
+moves_action = [(0, -1), (0, 1), (-1, 0), (1, 0)]
 
-for step in steps:
-  next_step = ()
-  
-  if step == 'L':
-    next_step = actions_move[0]
-  elif step == 'R':
-    next_step = actions_move[1]
-  elif step == 'U':
-    next_step = actions_move[2]
-  elif step == 'D':
-    next_step = actions_move[3]
+for action in actions:
+    nx, ny = 0, 0
+    for moveIdx in range(0, len(moves)):
+        if action == moves[moveIdx]:
+            dx, dy = moves_action[moveIdx]
+            nx = x + dx
+            ny = y + dy
+            if nx <= n and nx > 0 and ny <= n and ny > 0:
+                x = nx
+                y = ny
+            break
 
-  next_x, next_y = next_step
-  if (y + next_y) <= 0 or (x + next_x) <= 0 or (y + next_y) > n or (x + next_x) > n:
-    continue
-  x += next_x
-  y += next_y
-
-print(y, x)
+print(x, y)

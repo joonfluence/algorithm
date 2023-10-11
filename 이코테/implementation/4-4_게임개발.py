@@ -1,62 +1,53 @@
-# 맵 크기 
-n, m = map(int, input().split())
-# 위치 정보 받기 
-x, y, direction = map(int, input().split())
-# 북 동 남 서 
-action_moves = [(-1, 0), (0, 1), (1, 0), (0, -1)]
-count = 0
+n, m = list(map(int, input().split()))
+x, y, direction = list(map(int, input().split()))
 
-# 방문한 위치를 저장하기 위한 맵을 생성하여 0으로 초기화
-d = [[0] * m for _ in range(n)]
-# 캐릭터의 현재 위치를 방문 처리 
-d[x][y] = 1
-count = 1
-# 턴 횟수 정보
+moves = ['U', 'R', 'D', 'L'] # 북 동 남 서
+moves_action = [(-1, 0), (0, 1), (1, 0), (0, -1)]
+graph = []
+visited = [(x, y)]
 turn_time = 0
 
-# 맵 정보 초기화
-game_map = []
-for _ in range(0, n):
-  game_map.append(list(map(int, input().split())))
+for _ in range(n):
+  graph.append(list(map(int, input().split())))
 
 def turn_left():
-  global direction
+  global direction, turn_time
   direction -= 1
-  if direction == -1:
+  turn_time += 1
+
+  if direction < 0:
     direction = 3
+  return direction, turn_time
 
 while True:
-  # 일단 왼쪽 방향부터 확인 
-  turn_left()
-  next_x, next_y = action_moves[direction]
-  nx = x + next_x
-  ny = y + next_y
+  nx, ny = 0, 0
   
-  # 방문하지 않았고 그곳이 육지이면
-  if d[nx][ny] == 0 and game_map[nx][ny] == 0:
-    # 방문처리 
-    d[nx][ny] = 1
-    # 실제 이동 처리 
+  # 방향을 설정한다.
+  direction, turn_time = turn_left()
+  
+  # 왼쪽 방향에 아직 가보지 않은 칸이 존재한다면
+  dx, dy = moves_action[direction]
+  nx = x + dx
+  ny = y + dy
+
+  # 조건에 부합하면 이동한다.
+  if nx <= n and nx > 0 and ny <= m and ny > 0 and graph[nx][ny] == 0 and (nx, ny) not in visited:
     x = nx
-    y = ny 
-    count += 1
-    # 턴 초기화 
-    turn_time = 0
-    continue
-  else:
-    turn_time += 1
+    y = ny
+    visited.append((nx, ny))
+    turn_time = -1
+  
+  # 네 방향 모두 이미 가본 칸이거나 바다로 되어 있는 칸인 경우
   if turn_time == 4:
-    nx = x - next_x
-    ny = x - next_y
-    if game_map[nx][ny] == 0:
+    # 바라보는 방향을 유지한 채로 한 칸 뒤로 가고 1단계로 돌아간다
+    nx = x - dx
+    ny = y - dy
+    # 뒤쪽 방향이 바다인 칸이라 뒤로 갈 수 없는 경우
+    if graph[nx][ny] == 1:
+      break
+    else:
       x = nx
       y = ny
-    else:
-      break
     turn_time = 0
-
-print(count)
-
-# 포인트
-# 1. direction = 북, 동, 남, 서
-# 2. 방문한 곳을 추적한다 = d[x][y]
+  
+print(len(visited))
