@@ -1,18 +1,14 @@
 import math
-
-n = int(input())
-numbers = list(map(int, input().split()))
+m, n = list(map(int, input().split()))
 result = []
-count = 0
 
-def is_prime(numbers):
-  global count
-  for number in numbers:
+def is_prime(m, n):
+  for number in range(m, n+1):
     flag = 0
     if number == 1:
       continue
     if number == 2:
-      count += 1
+      result.append(number)
       continue
 
     for i in range(2, int(math.sqrt(number)) + 1):
@@ -21,7 +17,8 @@ def is_prime(numbers):
         break
     
     if flag == 0:
-      count += 1
-  return count
+      result.append(number)
+  return result
 
-print(is_prime(numbers))
+for element in is_prime(m, n):
+  print(element)
