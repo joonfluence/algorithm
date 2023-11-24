@@ -1,55 +1,43 @@
 package 브루트포스.N과M;
-
 import java.util.Scanner;
 
 /*
 
-순열
+각 정점에서 이동 가능한 정점들
 
-1. 숫자 조합을 입력 받는다.
-2. 뽑아야 할 숫자를 계산한다.
+1 - 1, 2, 3, 4
+2 - 1, 2, 3, 4
+3 - 1, 2, 3, 4
+4 - 1, 2, 3, 4
 
  */
+
 public class BF_15652 {
 
-    public static int[] arr;
-    public static int N, M;
-    public static StringBuilder sb = new StringBuilder();
+    private static int[] arr;
+    private static int N, M;
 
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-
-        N = in.nextInt();
-        M = in.nextInt();
-
-        // 숫자 조합을 입력 받는다.
-        int[] nums = new int[N];
-        for (int i = 1; i <= N; i++) {
-            nums[i-1] = i;
-        }
-
-        int[] output = new int[N];
-        dfs(nums, output, 0, 0, N, M);
+        Scanner sc = new Scanner(System.in);
+        N = sc.nextInt();
+        M = sc.nextInt();
+        arr = new int[M];
+        dfs( 1, 0);
     }
 
-    static void dfs(int[] arr, int[] output, int at, int depth, int n, int r){
-        if (depth == r){
-            print(output, r);
+    private static void dfs(int start, int depth){
+        if (depth == M){
+            for (int val: arr) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
             return;
         }
 
-        for (int i = at; i < n; i++) {
-            output[depth] = arr[i];
-            dfs(arr, output, i, depth+1, n, r);
+        // 1부터 N까지 다시 탐색
+        for (int i = start; i <= N; i++) {
+            arr[depth] = i;
+            dfs(i,depth + 1);
         }
-    }
-
-    static void print(int[] arr, int r){
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < r; i++) {
-            sb.append(arr[i]).append(" ");
-        }
-        System.out.println(sb);
     }
 }
-

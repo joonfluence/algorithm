@@ -17,23 +17,21 @@ import java.util.Scanner;
  */
 public class BF_15651 {
 
-    public static int[] arr;
-    public static int N, M;
-    public static StringBuilder sb = new StringBuilder();
+    private static int[] arr;
+    private static int N, M;
+    private static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-
         N = in.nextInt();
         M = in.nextInt();
-
         arr = new int[M];
-
-        dfs(0);
+        dfs(1,0);
         System.out.print(sb);
     }
 
-    public static void dfs(int depth) {
+    // at -> 출발 노드
+    private static void dfs(int at, int depth) {
         // 깊이가 M이랑 같아지면 출력후 return
         if (depth == M) {
             for (int i = 0; i < M; i++) {
@@ -43,9 +41,10 @@ public class BF_15651 {
             return;
         }
 
-        for (int i = 1; i <= N; i++) {
+        // from -> 인접 노드 (n개)
+        for (int i = at; i <= N; i++) {
             arr[depth] = i;
-            dfs(depth + 1);
+            dfs(i, depth + 1);
         }
     }
 }

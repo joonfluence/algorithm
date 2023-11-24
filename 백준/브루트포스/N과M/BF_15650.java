@@ -14,47 +14,32 @@ import java.util.*;
 public class BF_15650 {
 
     public static int[] arr;
+    public static boolean[] visited;
     public static int N, M;
     public static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-
         N = in.nextInt();
         M = in.nextInt();
-
-        // 숫자 조합을 입력 받는다.
-        int[] nums = new int[N];
-        for (int i = 1; i <= N; i++) {
-            nums[i-1] = i;
-        }
-
-        int[] output = new int[N];
-        boolean[] visited = new boolean[N];
-        dfs(nums, output, visited, 0, 0, N, M);
+        arr = new int[M];
+        visited = new boolean[N];
+        dfs(1, 0);
+        System.out.println(sb);
     }
 
-    static void dfs(int[] arr, int[] output, boolean[] visited, int at, int depth, int n, int r){
-        if (depth == r){
-            print(output, r);
+    static void dfs(int at, int depth){
+        if (depth == M){
+            for (int val: arr) {
+                sb.append(val).append(" ");
+            }
+            sb.append("\n");
             return;
         }
 
-        for (int i = at; i < n; i++) {
-            if (visited[i] != true){
-                visited[i] = true;
-                output[depth] = arr[i];
-                dfs(arr, output, visited, i+1, depth+1, n, r);
-                visited[i] = false;
-            }
+        for (int i = at; i <= N; i++) {
+            arr[depth] = i;
+            dfs(i+1, depth + 1);
         }
-    }
-
-    static void print(int[] arr, int r){
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < r; i++) {
-            sb.append(arr[i]).append(" ");
-        }
-        System.out.println(sb);
     }
 }

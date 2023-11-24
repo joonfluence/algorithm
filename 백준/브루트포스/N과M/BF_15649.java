@@ -1,6 +1,5 @@
 package 브루트포스.N과M;
 
-import java.io.*;
 import java.util.*;
 
 /*
@@ -12,47 +11,41 @@ import java.util.*;
 
  */
 public class BF_15649 {
-    public static int[] arr;
-    public static int N, M;
-    public static StringBuilder sb = new StringBuilder();
+    private static int[] arr;
+    private static boolean[] visited;
+    private static int N, M;
+    private static StringBuilder sb = new StringBuilder();
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         N = in.nextInt();
         M = in.nextInt();
-
-        // 숫자 조합을 입력 받는다.
-        int[] nums = new int[N];
-        for (int i = 1; i <= N; i++) {
-            nums[i - 1] = i;
-        }
-
-        int[] output = new int[N];
-        boolean[] visited = new boolean[N];
-        dfs(nums, output, visited, 0, N, M);
+        arr = new int[M];
+        visited = new boolean[N+1];
+        dfs(0);
+        System.out.print(sb);
     }
 
-    static void dfs(int[] arr, int[] output, boolean[] visited, int depth, int n, int r){
-        if (depth == r){
-            print(output, r);
+    private static void dfs(int depth){
+        if (depth == M){
+            print(M);
             return;
         }
 
-        for (int i = 0; i < n; i++) {
-            if (visited[i] != true){
+        for (int i = 1; i <= N; i++) {
+            if (!visited[i]){
                 visited[i] = true;
-                output[depth] = arr[i];
-                dfs(arr, output, visited, depth+1, n, r);
+                arr[depth] = i;
+                dfs(depth+1);
                 visited[i] = false;
             }
         }
     }
 
-    static void print(int[] arr, int r){
-        StringBuilder sb = new StringBuilder();
+    private static void print(int r){
         for (int i = 0; i < r; i++) {
             sb.append(arr[i]).append(" ");
         }
-        System.out.println(sb);
+        sb.append("\n");
     }
 }
