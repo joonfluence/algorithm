@@ -1,7 +1,6 @@
 package 브루트포스.N과M;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 /*
 
@@ -12,6 +11,7 @@ public class BF_15654 {
     private static int[] arr;
     private static int[] nums;
     private static boolean[] visited;
+    private static ArrayList<String> results = new ArrayList<>();
     private static int N, M;
     private static StringBuilder sb = new StringBuilder();
     public static void main(String[] args) {
@@ -27,24 +27,28 @@ public class BF_15654 {
         }
 
         Arrays.sort(nums);
-        dfs(0);
-        System.out.print(sb);
+        dfs(0, 0);
     }
 
-    private static void dfs(int depth){
+    private static void dfs(int start, int depth){
+        sb.setLength(0);
         if(depth == M){
             for (int val: arr) {
                 sb.append(val).append(" ");
             }
-            sb.append("\n");
+            String string = sb.toString();
+            if(!results.contains(string)){
+                System.out.println(string);
+                results.add(string);
+            }
             return;
         }
 
-        for (int i = 0; i < N; i++) {
+        for (int i = start; i < N; i++) {
             if(!visited[i]){
                 visited[i] = true;
                 arr[depth] = nums[i];
-                dfs(depth + 1);
+                dfs(i+1, depth + 1);
                 visited[i] = false;
             }
         }

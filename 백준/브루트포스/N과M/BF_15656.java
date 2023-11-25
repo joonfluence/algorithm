@@ -1,20 +1,15 @@
 package 브루트포스.N과M;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 /*
 
-https://www.acmicpc.net/problem/15654
-
-4 2
-9 8 7 1
+https://www.acmicpc.net/problem/15656
 
 */
 public class BF_15656 {
     private static int[] arr;
     private static int[] nums;
-    private static boolean[] visited;
     private static int N, M;
     private static StringBuilder sb = new StringBuilder();
     public static void main(String[] args) {
@@ -23,19 +18,19 @@ public class BF_15656 {
         M = sc.nextInt();
         arr = new int[M];
         nums = new int[N];
-        visited = new boolean[N];
 
         for (int i = 0; i < N; i++) {
             nums[i] = sc.nextInt();
         }
 
         Arrays.sort(nums);
-        dfs(0);
-        System.out.print(sb);
+        dfs(0, 0);
+        System.out.println(sb);
     }
 
-    private static void dfs(int depth){
+    private static void dfs(int start, int depth){
         if(depth == M){
+            // n번
             for (int val: arr) {
                 sb.append(val).append(" ");
             }
@@ -43,9 +38,15 @@ public class BF_15656 {
             return;
         }
 
-        for (int i = 0; i < N; i++) {
-            arr[depth] = nums[i];
-            dfs(depth + 1);
+        // n번
+        int before = 0;
+        for (int i = start; i < N; i++) {
+            if(before != nums[i]){
+                before = nums[i];
+                arr[depth] = nums[i];
+                // n번
+                dfs(i, depth + 1);
+            }
         }
     }
 }

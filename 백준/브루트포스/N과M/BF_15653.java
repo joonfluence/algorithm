@@ -1,17 +1,17 @@
 package 브루트포스.N과M;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 /*
 
-https://www.acmicpc.net/problem/15654
+https://www.acmicpc.net/problem/15653
 
 */
 public class BF_15653 {
     private static int[] arr;
     private static int[] nums;
     private static boolean[] visited;
+    private static ArrayList<String> results = new ArrayList<>();
     private static int N, M;
     private static StringBuilder sb = new StringBuilder();
     public static void main(String[] args) {
@@ -28,15 +28,19 @@ public class BF_15653 {
 
         Arrays.sort(nums);
         dfs(0);
-        System.out.print(sb);
     }
 
     private static void dfs(int depth){
+        sb.setLength(0);
         if(depth == M){
             for (int val: arr) {
                 sb.append(val).append(" ");
             }
-            sb.append("\n");
+            String string = sb.toString();
+            if(!results.contains(string)){
+                System.out.println(string);
+                results.add(string);
+            }
             return;
         }
 
