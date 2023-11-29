@@ -7,9 +7,9 @@ import java.util.StringTokenizer;
 
 /*
 
-https://zzingonglog.tistory.com/18
+https://dding9code.tistory.com/8
 
-1. A[i-1] < A [i]를 만족하는 가장 큰 i를 찾는다.
+1. A[i-1] < A[i]를 만족하는 가장 큰 i를 찾는다.
 2. j >= i 이면서 A[j] > A [i-1]을 만족하는 가장 큰 j를 찾는다.
 3. A[i-1]과 A [j]를 swap 한다.
 4. A[i] 부터 순열을 뒤집는다.

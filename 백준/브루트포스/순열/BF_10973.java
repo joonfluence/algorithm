@@ -7,12 +7,7 @@ import java.util.StringTokenizer;
 
 /*
 
-https://zzingonglog.tistory.com/18
-
-1. A[i-1] < A [i]를 만족하는 가장 큰 i를 찾는다.
-2. j >= i 이면서 A[j] > A [i-1]을 만족하는 가장 큰 j를 찾는다.
-3. A[i-1]과 A [j]를 swap 한다.
-4. A[i] 부터 순열을 뒤집는다.
+https://dundung.tistory.com/58
 
  */
 
@@ -47,19 +42,22 @@ public class BF_10973 {
             i -= 1;
         }
 
+        // 첫 번째 순열인 경우
         if(i <= 0){
             return false;
         }
 
+        // nums[i-1] > nums[j]를 만족하는 첫 번째 수 찾기
         int j = size;
-
-        while (nums[i-1] >= nums[j]){
+        while (nums[j] >= nums[i-1]){
             j -= 1;
         }
 
+        // nums[i-1]와 nums[j]를 swap
         swap(i-1, j);
         j = size;
 
+        // i부터 a.length-1까지 순열 뒤집기
         while (i < j){
             swap(i, j);
             i += 1;
