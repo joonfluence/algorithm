@@ -7,7 +7,10 @@ import java.util.StringTokenizer;
 
 /*
 
-https://dundung.tistory.com/58
+이전 순열
+
+- https://www.acmicpc.net/problem/10973
+- https://dundung.tistory.com/58
 
  */
 
@@ -37,13 +40,15 @@ public class BF_10973 {
 
     private static boolean nextPerm(){
         int size = nums.length - 1;
+
+        // i는 마지막 인덱스부터 순회
         int i = size;
         while (i > 0 && nums[i-1] <= nums[i]){
             i -= 1;
         }
 
-        // 첫 번째 순열인 경우
-        if(i <= 0){
+        // (내림차순으로 정렬된 경우) 첫 번째 순열인 경우
+        if (i <= 0){
             return false;
         }
 

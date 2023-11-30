@@ -20,11 +20,11 @@ public class BF_10974 {
         N = sc.nextInt();
         arr = new int[N];
         visited = new boolean[N];
-        dfs(1, 0);
+        dfs(0);
         System.out.print(sb);
     }
 
-    private static void dfs(int start, int depth){
+    private static void dfs(int depth){
         if(depth == N){
             for (int value: arr) {
                 sb.append(value).append(" ");
@@ -38,7 +38,7 @@ public class BF_10974 {
             if(!visited[i-1]){
                 visited[i-1] = true;
                 arr[depth] = i;
-                dfs(i+1, depth+1);
+                dfs(depth+1);
                 visited[i-1] = false;
             }
         }
