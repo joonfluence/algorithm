@@ -28,7 +28,7 @@ for word in words:
           # 스택의 top에 있는 연산자의 우선순위 >= 현재 연산자의 우선순위이면 스택이 비거나 현재 연산자의 우선순위가 커질 때까지 pop한다 
           if operands.get(stack[-1]) - operands.get(word) >= 0:
             while stack:
-              if operands.get(stack[-1]) - operands.get(word) >= 0:
+              if stack[-1] != '(' and operands.get(stack[-1]) - operands.get(word) >= 0:
                 result += stack.pop()
               else:
                 break
