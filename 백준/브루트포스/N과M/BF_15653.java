@@ -6,6 +6,18 @@ import java.util.*;
 
 https://www.acmicpc.net/problem/15653
 
+4 2
+9 8 7 1
+
+1. 정렬 : 1 7 8 9
+
+1 -> 7
+  -> 8
+  -> 9
+7 -> 1
+  -> 8
+  -> 9
+
 */
 public class BF_15653 {
     private static int[] arr;
